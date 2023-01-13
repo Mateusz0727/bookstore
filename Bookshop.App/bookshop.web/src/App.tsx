@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import WeatherService from './services/weather.service';
 
 function App() {
+  WeatherService.get();
   return (
     <div className="App">
       <header className="App-header">

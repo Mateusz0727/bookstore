@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ogLQzfO8vYFLnV/gLW2SWFb2K3mPONgu9NskkkRf2jNy84unsj1RvE9tnS5x6LKmdI9fhmSU4SOmlIa69wclYQ==",
+  "dgSpecHash": "3taF/FzNbgnmSG2ktXKVcFI17n3X97g4Xh58DZDpcwpsLAPPw9THFHoLRGVoeXOFNE5QAMf0qjX6XpybUFvTJA==",
   "success": true,
   "projectFilePath": "G:\\Bookshop\\Bookshop.App\\Bookshop.App\\Bookshop.App.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\ziemb\\.nuget\\packages\\fluentmigrator.runner.sqlite\\3.3.2\\fluentmigrator.runner.sqlite.3.3.2.nupkg.sha512",
     "C:\\Users\\ziemb\\.nuget\\packages\\fluentmigrator.runner.sqlserver\\3.3.2\\fluentmigrator.runner.sqlserver.3.3.2.nupkg.sha512",
     "C:\\Users\\ziemb\\.nuget\\packages\\fluentmigrator.runner.sqlserverce\\3.3.2\\fluentmigrator.runner.sqlserverce.3.3.2.nupkg.sha512",
+    "C:\\Users\\ziemb\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.13\\microsoft.aspnetcore.authentication.jwtbearer.6.0.13.nupkg.sha512",
     "C:\\Users\\ziemb\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\ziemb\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.1\\microsoft.data.sqlclient.5.0.1.nupkg.sha512",

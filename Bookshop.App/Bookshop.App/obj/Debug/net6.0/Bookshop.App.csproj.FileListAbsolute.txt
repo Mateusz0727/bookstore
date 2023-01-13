@@ -104,3 +104,4 @@ G:\Bookshop\Bookshop.App\Bookshop.App\bin\Debug\net6.0\Bookshop.Migration.dll
 G:\Bookshop\Bookshop.App\Bookshop.App\bin\Debug\net6.0\Bookshop.Data.pdb
 G:\Bookshop\Bookshop.App\Bookshop.App\bin\Debug\net6.0\Bookshop.Migration.pdb
 G:\Bookshop\Bookshop.App\Bookshop.App\bin\Debug\net6.0\secret.json
+G:\Bookshop\Bookshop.App\Bookshop.App\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
