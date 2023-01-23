@@ -1,8 +1,16 @@
-﻿using Bookshop.Data.Model;
+﻿using Bookshop;
+using Bookshop.Data.Model;
+using Bookshop.Helpers;
+using Hangfire;
+using Hangfire.SqlServer;
 using Ideo.Core.App.Extensions.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Bookshop.App.Extensions;
+using Bookshop.Mailing;
+using MailKit.Net.Smtp;
 
 namespace management.System.App
 {
@@ -28,7 +36,10 @@ namespace management.System.App
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "management.System v1"));
             }
-
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
+            app.ApplicationServices.GetRequiredService<IJobScheduler>().Schedule();
+         
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("_myAllowSpecificOrigins");
@@ -38,9 +49,10 @@ namespace management.System.App
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHangfireDashboard();
             });
             Bookshop.Migration.Migrator.Run(Configuration);
-
+       
 
         }
         public void ConfigureServices(IServiceCollection services)
@@ -59,6 +71,10 @@ namespace management.System.App
                       });
             });
             services.AddSingleton(services);
+            services.RegisterScheduledJobs();
+            services.AddScoped<Mailer>();
+            services.AddScoped<SmtpClient>();
+            services.AddScoped<IJobScheduler, Bookshop.App.Extensions.Background.Hangfire>();
             //dodawanie kontrolerow
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -91,6 +107,19 @@ namespace management.System.App
            
 
              });
+            services.AddHangfire(configuration => configuration
+               .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+               .UseSimpleAssemblyNameTypeSerializer()
+               .UseRecommendedSerializerSettings()
+               .UseSqlServerStorage(ConnectionString, new SqlServerStorageOptions
+               {
+                   CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+                   SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+                   QueuePollInterval = TimeSpan.Zero,
+                   UseRecommendedIsolationLevel = true,
+                   DisableGlobalLocks = true
+               }));
+            services.AddHangfireServer();
             services.Configure<IISServerOptions>(options =>
             {
                 options.AutomaticAuthentication = false;

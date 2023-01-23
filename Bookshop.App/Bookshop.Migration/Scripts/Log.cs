@@ -13,20 +13,17 @@ namespace Bookshop.Migration.Scripts
     {
         public override void Up()
         {
-            if (!Schema.Table("Log").Exists())
-            {
+            
                 Create.Table("Log")
                     .WithColumn("Id").AsInt64().PrimaryKey().Identity()
                     .WithColumn("Text").AsString();
-            }
+            
         }
 
         public override void Down()
         {
-            if (Schema.Table("Log").Exists())
-            {
                 Delete.Table("Log");
-            }
+            
         }
     }
 }
