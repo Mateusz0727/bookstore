@@ -1,1 +1,10 @@
-﻿Bookshop.App/.vs
+﻿################################################################################
+# Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
+################################################################################
+
+/Bookshop.App/Bookshop.App/Bookshop.App.csproj
+obj
+bin
+.vs
+Bookshop.App/.vs
+Bookshop.App/Bookshop.App/obj
