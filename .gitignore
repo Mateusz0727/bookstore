@@ -3,3 +3,6 @@
 ################################################################################
 
 /Bookshop.App/Bookshop.App/Bookshop.App.csproj
+obj
+bin
+.vs
