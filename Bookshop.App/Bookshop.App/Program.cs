@@ -24,6 +24,7 @@ namespace management.System.App
                     webBuilder.UseStartup<Startup>();
                     webBuilder.UseIISIntegration();
                     webBuilder.UseIIS();
+                    webBuilder.UseDefaultServiceProvider(options => options.ValidateScopes = false);
                     
                 });
     }
