@@ -13,11 +13,11 @@ export default class WeatherService{
 }
 export interface WeatherForecastForm
 {
-      Date:string ;
+      date:Date ;
 
-      TemperatureC:number ;
+      temperatureC:number ;
 
-     TemperatureF:number ;
+     temperatureF:number ;
 
-      Summary:string ;
+      summary:string ;
 }
