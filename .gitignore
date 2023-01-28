@@ -2,9 +2,14 @@
 # Ten plik .gitignore został utworzony automatycznie przez Microsoft(R) Visual Studio.
 ################################################################################
 
-/Bookshop.App/Bookshop.App/Bookshop.App.csproj
+
 obj
-bin
+bin\
+thumbs.db
 .vs
-Bookshop.App/.vs
-Bookshop.App/Bookshop.App/obj
+
+Bookshop.App/Bookshop.App/bin
+Bookshop.App/Bookshop.Data/bin
+Bookshop.App/Bookshop.Data/obj
+Bookshop.App/Bookshop.Migration/bin
+Bookshop.App/Bookshop.Migration/obj
