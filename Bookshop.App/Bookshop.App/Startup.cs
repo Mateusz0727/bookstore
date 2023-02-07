@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Bookshop.App.Extensions;
 using Bookshop.Mailing;
 using MailKit.Net.Smtp;
+using System.Reflection;
+using Bookshop.App.Models;
+using Bookshop.App.Services.Book;
+using AutoMapper;
 
 namespace management.System.App
 {
@@ -56,7 +60,19 @@ namespace management.System.App
 
         }
         public void ConfigureServices(IServiceCollection services)
-        {
+        { //Automapper
+            #region AutoMapper
+            var mappingCongig = new MapperConfiguration(mc =>
+         mc.AddProfile(
+             new AutoMapperInitializator()
+             )
+         );
+            IMapper mapper = mappingCongig.CreateMapper();
+            services.AddSingleton(mapper);
+
+
+            #endregion
+
             //dodanie kontekstu bazy danych 
             services.AddDbContext<BaseContext>(options =>
                 options.UseSqlServer(ConnectionString)
@@ -75,6 +91,7 @@ namespace management.System.App
             services.AddScoped<Mailer>();
             services.AddScoped<SmtpClient>();
             services.AddScoped<IJobScheduler, Bookshop.App.Extensions.Background.Hangfire>();
+            services.AddScoped<BookService>();
             //dodawanie kontrolerow
             services.AddControllers();
             services.AddSwaggerGen(c =>
