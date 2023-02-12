@@ -37,5 +37,15 @@ namespace Bookshop.Migration
             return builder.AsString(65535);
         }
         #endregion
+        #region WithAuditable()
+        public static ICreateTableWithColumnSyntax WithAuditable(this ICreateTableWithColumnSyntax builder)
+        {
+            return builder
+                .WithColumn("DateCreatedUtc").AsDateTime2()
+                .WithColumn("CreatedBy").AsLong()
+                .WithColumn("DateModifiedUtc").AsDateTime2().Nullable()
+                .WithColumn("ModifiedBy").AsLong().Nullable();
+        }
+        #endregion
     }
 }

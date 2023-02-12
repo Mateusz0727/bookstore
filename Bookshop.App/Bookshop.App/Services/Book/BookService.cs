@@ -27,12 +27,20 @@ namespace Bookshop.App.Services.Book
             return book == null ? null : book;
         }
         #endregion
-       /* #region Create()
-        public Data.Model.Book Create(BookFormModel formModel)
+        #region GetPopular()
+        public Data.Model.Book GetPopular(long id)
         {
-            var entity = Mapper.Map<Data.Model.Book>(formModel);
-            return entity;
+            var book = Context.Books.FirstOrDefault(x => x.Id == id);
+
+            return book == null ? null : book;
         }
-        #endregion*/
+        #endregion
+        /* #region Create()
+         public Data.Model.Book Create(BookFormModel formModel)
+         {
+             var entity = Mapper.Map<Data.Model.Book>(formModel);
+             return entity;
+         }
+         #endregion*/
     }
 }

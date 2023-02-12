@@ -15,6 +15,8 @@ using System.Reflection;
 using Bookshop.App.Models;
 using Bookshop.App.Services.Book;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Bookshop.Configuration;
 
 namespace management.System.App
 {
@@ -41,8 +43,8 @@ namespace management.System.App
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "management.System v1"));
             }
             app.UseHangfireDashboard();
-            app.UseHangfireServer();
-            app.ApplicationServices.GetRequiredService<IJobScheduler>().Schedule();
+          /*  app.UseHangfireServer();*/
+          /*  app.ApplicationServices.GetRequiredService<IJobScheduler>().Schedule();*/
          
             app.UseHttpsRedirection();
             app.UseRouting();
@@ -63,7 +65,7 @@ namespace management.System.App
         { //Automapper
             #region AutoMapper
             var mappingCongig = new MapperConfiguration(mc =>
-         mc.AddProfile(
+                 mc.AddProfile(
              new AutoMapperInitializator()
              )
          );
@@ -86,18 +88,23 @@ namespace management.System.App
                                               "http://localhost:3000");
                       });
             });
+            services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
+            var bindJwtSettings = new JWTConfig();
+            Configuration.Bind("JsonWebTokenKeys", bindJwtSettings);
+            services.AddSingleton(bindJwtSettings);
             services.AddSingleton(services);
-            services.RegisterScheduledJobs();
+            services.RegisterServices();
+        /*    services.RegisterScheduledJobs();*/
             services.AddScoped<Mailer>();
             services.AddScoped<SmtpClient>();
             services.AddScoped<IJobScheduler, Bookshop.App.Extensions.Background.Hangfire>();
-            services.AddScoped<BookService>();
+           
             //dodawanie kontrolerow
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "management.System", Version = "v1" });
-              /*  c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
                     Name = "Authorization",
                     Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
@@ -120,10 +127,10 @@ namespace management.System.App
                         new string[] {}
                     }
                 });
-            });*/
-           
+            });
 
-             });
+
+      
             services.AddHangfire(configuration => configuration
                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                .UseSimpleAssemblyNameTypeSerializer()
