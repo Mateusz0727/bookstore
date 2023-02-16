@@ -37,7 +37,7 @@ namespace Bookshop.Mailing
         {
 
            
-            if (!_client.IsConnected)
+         /*  if (!_client.IsConnected)
             {
                 _client.Connect(Configuration["Mail:Host"],
                     Convert.ToInt32(Configuration["Mail:Port"]),
@@ -61,7 +61,7 @@ namespace Bookshop.Mailing
                 message.From.Add(new MailboxAddress("", ""
                 ));
             }
-            _client.Send(message);
+            _client.Send(message);*/
 
         }
      

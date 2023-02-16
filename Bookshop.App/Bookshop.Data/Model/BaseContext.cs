@@ -41,6 +41,8 @@ public partial class BaseContext : DbContext
 
     public virtual DbSet<State> States { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
+
     public virtual DbSet<VersionInfo> VersionInfos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -211,6 +213,25 @@ public partial class BaseContext : DbContext
             entity.HasOne(d => d.Job).WithMany(p => p.States)
                 .HasForeignKey(d => d.JobId)
                 .HasConstraintName("FK_HangFire_State_Job");
+        });
+
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.ToTable("User");
+
+            entity.HasIndex(e => e.Email, "IX_Email").IsUnique();
+
+            entity.HasIndex(e => e.UserName, "IX_UserName").IsUnique();
+
+            entity.Property(e => e.Email).HasMaxLength(250);
+            entity.Property(e => e.GivenName).HasMaxLength(250);
+            entity.Property(e => e.PasswordHash).HasMaxLength(250);
+            entity.Property(e => e.PublicId)
+                .HasMaxLength(36)
+                .IsUnicode(false)
+                .IsFixedLength();
+            entity.Property(e => e.Surname).HasMaxLength(250);
+            entity.Property(e => e.UserName).HasMaxLength(250);
         });
 
         modelBuilder.Entity<VersionInfo>(entity =>

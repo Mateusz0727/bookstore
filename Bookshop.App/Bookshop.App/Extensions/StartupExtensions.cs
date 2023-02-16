@@ -25,5 +25,25 @@ namespace Bookshop.App.Extensions
 
             return services;
         }
+        #region RegisterServices()
+        public static IServiceCollection RegisterServices(this IServiceCollection services)
+        {
+            var assembly = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(p => p.GetName().Name == "Bookshop.App")
+                .FirstOrDefault();
+
+            if (assembly != null)
+            {
+                assembly.GetTypes()
+                    .Where(p => p.Name.EndsWith("Service"))
+                    .ToList()
+                    .ForEach(p =>
+                        services.AddTransient(p)
+                    );
+            }
+
+            return services;
+        }
+        #endregion
     }
 }
