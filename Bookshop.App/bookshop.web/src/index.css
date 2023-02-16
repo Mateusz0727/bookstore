@@ -1,13 +1,341 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  margin: 0px;
+  background-color: black;
+
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+header {
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  height: 30px;
+  width: 91%;
+  padding: 30px;
+  position: relative;
+
 }
+
+#logo {
+  float: left;
+
+}
+
+#powitalny {
+  width: 25%;
+}
+
+img {
+  width: 220px;
+
+}
+
+
+nav {
+  text-align: center;
+  display: block;
+}
+
+.butnav {
+  color: #C0CBD6;
+  text-decoration: none;
+  padding: 40px;
+  font-size: 25px;
+  text-align: center;
+
+}
+
+a:hover {
+  color: white;
+}
+
+/*PRZYCISK*/
+
+.search-box {
+  position: relative;
+  height: 60px;
+  width: 0px;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  float: right;
+}
+
+.search-box.active {
+  width: 180px;
+}
+
+.search-box.active input {
+  opacity: 1;
+}
+
+.search-box input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  background: #fff;
+  font-size: 18px;
+  border-radius: 50px;
+  padding: 0 60px 0 20px;
+  outline: none;
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.search-box .search-btn {
+  height: 50px;
+  width: 50px;
+  background: black;
+  color: white;
+  position: absolute;
+  top: 50%;
+  right: -75px;
+  transform: translateY(-50%);
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2;
+}
+
+.search-box.active .search-btn {
+  height: 50px;
+  width: 50px;
+  background: black;
+  color: #fff;
+}
+
+.search-box .cancel-btn {
+  position: absolute;
+  color: white;
+  top: 50%;
+  right: -75px;
+  transform: translateY(-50%);
+  font-size: 25px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.search-box.active .cancel-btn {
+  right: -135px;
+  opacity: 1;
+  color: #fff;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+main {
+
+  padding: 50px;
+  color: white;
+  padding-top: 100px;
+
+}
+
+h2 {
+  font-size: 50px;
+  text-align: left;
+
+}
+
+#tekst_boczny {
+  width: 300px;
+  text-align: center;
+}
+
+#powitalny {
+  float: left;
+}
+
+
+/* PRODUCTS */
+.product {
+  position: relative;
+  overflow: hidden;
+  padding: 40px;
+}
+
+.product-category {
+  padding: 0 10vw;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 40px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.product-container {
+  padding: 0 3vw;
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.product-container::-webkit-scrollbar {
+  display: none;
+}
+
+.product-card {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 450px;
+  margin-right: 40px;
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+}
+
+.product-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.discount-tag {
+  position: absolute;
+  background: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  color: #ff7d7d;
+  right: 10px;
+  top: 10px;
+  text-transform: capitalize;
+}
+
+.card-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  width: 90%;
+  text-transform: capitalize;
+  border: none;
+  outline: none;
+  background: #fff;
+  border-radius: 5px;
+  transition: 0.5s;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.product-card:hover .card-btn {
+  opacity: 1;
+}
+
+.card-btn:hover {
+  background: #ff7d7d;
+  color: #fff;
+}
+
+.product-info {
+  width: 100%;
+  height: 100px;
+  padding-top: 10px;
+}
+
+.product-brand {
+  text-transform: uppercase;
+}
+
+.product-short-description {
+  width: 100%;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  opacity: 0.5;
+  text-transform: capitalize;
+  margin: 5px 0;
+}
+
+.price {
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.actual-price {
+  margin-left: 20px;
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+
+
+.pre-btn i,
+.nxt-btn i {
+  border: none;
+  background-color: black;
+  color: #C0CBD6;
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  margin: 6px;
+  font-size: 20px;
+}
+
+.pre-btn i {
+  left: 0;
+  transform: rotate(180deg);
+
+}
+
+.nxt-btn i {
+  right: 0;
+}
+
+.pre-btn i,
+.nxt-btn i {
+  opacity: 0.2;
+}
+
+.pre-btn i:hover,
+.nxt-btn i:hover {
+  opacity: 2;
+}
+
+.collection-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.collection {
+  position: relative;
+}
+
+.collection img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  font-size: 50px;
+  text-transform: capitalize;
+}
+
+.collection:nth-child(3) {
+  grid-column: span 2;
+  margin-bottom: 10px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
