@@ -1,4 +1,4 @@
-using management.System.App;
+
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace management.System.App
+namespace Bookshop.App
 {
     public class Program
     {

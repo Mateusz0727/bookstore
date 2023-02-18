@@ -17,8 +17,11 @@ using Bookshop.App.Services.Book;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Bookshop.Configuration;
+using Bookshop.App.Services.User;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 
-namespace management.System.App
+namespace Bookshop.App
 {
     public class Startup
     {
@@ -40,7 +43,7 @@ namespace management.System.App
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "management.System v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bookshop v1"));
             }
             app.UseHangfireDashboard();
           /*  app.UseHangfireServer();*/
@@ -87,6 +90,7 @@ namespace management.System.App
                           builder.WithOrigins("http://localhost:3000",
                                               "http://localhost:3000");
                       });
+
             });
             services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
             var bindJwtSettings = new JWTConfig();
@@ -103,7 +107,7 @@ namespace management.System.App
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "management.System", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Bookshop", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -128,9 +132,75 @@ namespace management.System.App
                     }
                 });
             });
+            services.AddAuthorization(options =>
+            {
+                var schemes = "Jwt";
+                options.DefaultPolicy = new AuthorizationPolicyBuilder(schemes)
+                  .RequireAuthenticatedUser()
+                  .Build();
+
+                options.AddPolicy("JwtPolicy", new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .AddAuthenticationSchemes("Jwt")
+                    .Build());
+              
+            }
+          );
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer("Jwt", options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                    {
+                        ValidateIssuerSigningKey = bindJwtSettings.ValidateIssuerSigningKey,
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(bindJwtSettings.IssuerSigningKey)),
+                        ValidateIssuer = bindJwtSettings.ValidateIssuer,
+                        ValidIssuer = bindJwtSettings.ValidIssuer,
+                        ValidateAudience = bindJwtSettings.ValidateAudience,
+                        ValidAudience = bindJwtSettings.ValidAudience,
+                        RequireExpirationTime = bindJwtSettings.RequireExpirationTime,
+                        ValidateLifetime = bindJwtSettings.RequireExpirationTime,
+                        ClockSkew = TimeSpan.FromDays(1),
+                    };
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = async context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;
+
+                            if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                            {
+                                context.Token = accessToken;
+                            }
+                            else if (context.Request.Cookies.ContainsKey("access-token") && context.Request.Cookies.ContainsKey("access-signature"))
+                            {
+                                context.Token = $"{context.Request.Cookies["access-token"]}.{context.Request.Cookies["access-signature"]}";
+                            }
+                            if (!String.IsNullOrEmpty(context.Token) && (
+                              context.Request.Headers.ContainsKey("Authorization") == false ||
+                             context.Request.Headers["Authorization"].Where(p => p.StartsWith("Bearer")).Any()
+                           ))
+                            {
+                                context.Request.Headers.Add("Authorization", $" {context.Token}");
+                            }
+                        },
+                        OnTokenValidated = async context =>
+                        {
+                        },
+                        OnChallenge = async context =>
+                        {
+                        }
+                    };
+
+                });
 
 
-      
             services.AddHangfire(configuration => configuration
                .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                .UseSimpleAssemblyNameTypeSerializer()

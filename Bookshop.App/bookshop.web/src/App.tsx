@@ -1,8 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import WeatherService from './services/weather.service';
-import Dashboard from './views/modules/component/Dashboard';
+import Dashboard from './views/modules/Dashboard';
 
 function App() {
 
