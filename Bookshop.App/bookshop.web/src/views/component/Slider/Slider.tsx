@@ -33,9 +33,11 @@ export default class Slider extends Component<BookProp>
       return (
         <div>
           <div className="pre-btn" onClick={prev}>
+            1
             <i className="fa-solid fa-chevron-right"></i>          
           </div>
           <div className="nxt-btn" onClick={next}>
+            2
             <i className="fa-solid fa-chevron-right"></i>
           </div>     
           <div className="product-container">
@@ -53,68 +55,8 @@ export default class Slider extends Component<BookProp>
                 </div>   
               </div>
             )}
-            {/* <div className="product-card">
-              <div className="product-image">
-                <span className="discount-tag">50% off</span>
-                <img src="k1.jpeg" className="product-thumb" alt="" />
-                <button className="card-btn">add to wishlist</button>
-              </div>
-              <div className="product-info">
-                <h2 className="product-brand">brand</h2>
-                <p className="product-short-description">a short line about the cloth..</p>
-                <span className="price">$20</span><span className="actual-price">$40</span>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image">
-                <span className="discount-tag">50% off</span>
-                <img src="k2.jpeg" className="product-thumb" alt="" />
-                <button className="card-btn">add to wishlist</button>
-              </div>
-              <div className="product-info">
-                <h2 className="product-brand">brand</h2>
-                <p className="product-short-description">a short line about the cloth..</p>
-                <span className="price">$20</span><span className="actual-price">$40</span>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image">
-                <span className="discount-tag">50% off</span>
-                <img src="k3.jpeg" className="product-thumb" alt="" />
-                <button className="card-btn">add to wishlist</button>
-              </div>
-              <div className="product-info">
-                <h2 className="product-brand">brand</h2>
-                <p className="product-short-description">a short line about the cloth..</p>
-                <span className="price">$20</span><span className="actual-price">$40</span>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image">
-                <span className="discount-tag">50% off</span>
-                <img src="k1.jpeg" className="product-thumb" alt="" />
-                <button className="card-btn">add to wishlist</button>
-              </div>
-              <div className="product-info">
-                <h2 className="product-brand">brand</h2>
-                <p className="product-short-description">a short line about the cloth..</p>
-                <span className="price">$20</span><span className="actual-price">$40</span>
-              </div>
-            </div>
-            <div className="product-card">
-              <div className="product-image">
-                <span className="discount-tag">50% off</span>
-                <img src="k1.jpeg" className="product-thumb" alt="" />
-                <button className="card-btn">add to wishlist</button>
-              </div>
-              <div className="product-info">
-                <h2 className="product-brand">brand</h2>
-                <p className="product-short-description">a short line about the cloth..</p>
-                <span className="price">$20</span><span className="actual-price">$40</span>
-              </div>
-            </div> */}
-              
-          </div>
+           
+        </div>
         </div>
       );
     }

@@ -9,14 +9,14 @@ export const Search =()=>
     }
 
     return (
-        <div onClick={active} className={`search-box ${isActive ? "active" : "inactive"}`}>
+        <div className={`search-box ${isActive ? "active" : "inactive"}`}>
         <input type="text" placeholder="Type to search..." />
-        <div className="search-btn">
+        <div  onClick={active} className="search-btn">
           <i className="fas fa-search"></i>
          
         </div>
 
-        <div className="cancel-btn">
+        <div  onClick={active} className="cancel-btn">
           <i className="fas fa-times"></i>
         </div>
       </div>
