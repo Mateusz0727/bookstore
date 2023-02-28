@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Bookshop\\Bookshop.App\\Bookshop\\Bookshop.csproj": {}
+    "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj": {}
   },
   "projects": {
-    "G:\\Bookshop\\Bookshop.App\\Bookshop\\Bookshop.csproj": {
+    "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Bookshop\\Bookshop.App\\Bookshop\\Bookshop.csproj",
+        "projectUniqueName": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
         "projectName": "Bookshop",
-        "projectPath": "G:\\Bookshop\\Bookshop.App\\Bookshop\\Bookshop.csproj",
-        "packagesPath": "C:\\Users\\ziemb\\.nuget\\packages\\",
-        "outputPath": "G:\\Bookshop\\Bookshop.App\\Bookshop\\obj\\",
+        "projectPath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
+        "packagesPath": "/Users/kacpersaj/.nuget/packages/",
+        "outputPath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\ziemb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/kacpersaj/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

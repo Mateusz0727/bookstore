@@ -40,7 +40,7 @@ namespace Bookshop.Migration
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(config.GetConnectionString("Database"))
+                    .WithGlobalConnectionString(config.GetConnectionString("DefaultConnectionString"))
                     .WithGlobalCommandTimeout(TimeSpan.FromSeconds(300))
                    .WithMigrationsIn(typeof(Program).Assembly))
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
@@ -95,7 +95,7 @@ namespace Bookshop.Migration
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString(config.GetConnectionString("Database"))
+                    .WithGlobalConnectionString(config.GetConnectionString("DefaultConnectionString"))
                     .WithGlobalCommandTimeout(TimeSpan.FromSeconds(300))
                     .ScanIn(typeof(Program).Assembly).For.Migrations())
 
