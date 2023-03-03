@@ -42,18 +42,18 @@ export default class SubPage extends Component {
                     <section className="product">
                         <h2 className="product-category">Nowości</h2>
 
-                        <Slider key={1} books={this.items} />
+                        <Slider books={this.items} type="news" />
                     </section>
                     <section className="product">
                         <h2 className="product-category">Ebooki</h2>
 
-                        <Slider key={2} books={this.items} />
+                        <Slider books={this.items} type="ebook" />
                     </section>
 
                     <section className="product">
                         <h2 className="product-category">Obcojęzyczne</h2>
 
-                        <Slider key={3} books={this.items} />
+                        <Slider books={this.items} type="other" />
                     </section>
 
 

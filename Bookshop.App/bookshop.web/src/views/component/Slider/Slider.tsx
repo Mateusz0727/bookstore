@@ -1,10 +1,12 @@
-import { Component, ReactNode } from "react";
+import { Component, ReactNode, useState } from "react";
 import { BookForm } from "../../../services/book.service";
 import '../../../index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { type } from "os";
 interface BookProp {
   books: BookForm[];
+  type: string;
 }
 export default class Slider extends Component<BookProp>
 {
@@ -13,9 +15,9 @@ export default class Slider extends Component<BookProp>
   }
   render(): ReactNode {
 
-
+    const type = this.props.type;
     function prev(): void {
-      const productContainers = document.querySelectorAll('.product-container');
+      const productContainers = document.querySelectorAll("." + type);
       productContainers.forEach((item, i) => {
         let containerDimensions = item.getBoundingClientRect();
         let containerWidth = containerDimensions.width;
@@ -23,14 +25,13 @@ export default class Slider extends Component<BookProp>
       })
     }
     function next(): void {
-      const productContainers = document.querySelectorAll('.product-container');
+      const productContainers = document.querySelectorAll("." + type);
       productContainers.forEach((item, i) => {
         let containerDimensions = item.getBoundingClientRect();
         let containerWidth = containerDimensions.width;
         item.scrollLeft += containerWidth;
       })
     }
-
     return (
       <div>
         <div className="pre-btn" onClick={prev}>
@@ -41,7 +42,8 @@ export default class Slider extends Component<BookProp>
 
           <i> <FontAwesomeIcon icon={faChevronRight} /></i>
         </div>
-        <div className="product-container">
+        {/* <div className="product-container"> */}
+        <div className={this.props.type + ' product-container'}>
           {this.props.books.map((item) =>
             <div className="product-card" key={item.id}>
               <div className="product-image" >
@@ -59,7 +61,7 @@ export default class Slider extends Component<BookProp>
           )}
 
         </div>
-      </div>
+      </div >
     );
   }
 

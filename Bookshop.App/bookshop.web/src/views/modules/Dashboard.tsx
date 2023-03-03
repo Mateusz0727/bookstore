@@ -52,7 +52,7 @@ export default class Dashboard extends Component {
           <section className="product">
             <h2 className="product-category">Popularne ostatnio</h2>
 
-            <Slider books={this.items} />
+            <Slider books={this.items} type="main" />
 
 
           </section>
