@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tDhg5NR9/3/tiNCmoX9WtFiv+6ENyHCCbZMPuZqY5fMOZhJuYZtU1kMERpK/m8aGC8jG55KufOsYMj5xEfbUHg==",
+  "dgSpecHash": "ArDkkOlOZYwiH/lHDQRKH66QwFpYs5sRR8Papnji0cDKUCAx302JRR53lPXSur1GMbfzfmJ2oOR9wKndo4SDfw==",
   "success": true,
-  "projectFilePath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
+  "projectFilePath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
   "expectedPackageFiles": [
     "/Users/kacpersaj/.nuget/packages/mailkit/3.4.3/mailkit.3.4.3.nupkg.sha512",
     "/Users/kacpersaj/.nuget/packages/microsoft.extensions.configuration.abstractions/7.0.0/microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",

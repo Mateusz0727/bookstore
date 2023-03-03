@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj": {}
+    "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/bookstore/Bookshop.App/Bookshop/Bookshop.csproj": {}
   },
   "projects": {
-    "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj": {
+    "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/bookstore/Bookshop.App/Bookshop/Bookshop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
+        "projectUniqueName": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
         "projectName": "Bookshop",
-        "projectPath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
+        "projectPath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/bookstore/Bookshop.App/Bookshop/Bookshop.csproj",
         "packagesPath": "/Users/kacpersaj/.nuget/packages/",
-        "outputPath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/Bookshop.App/Bookshop/obj/",
+        "outputPath": "/Users/kacpersaj/Downloads/Kacper Saj - Projekt Strony/bookstore/bookstore/Bookshop.App/Bookshop/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kacpersaj/.nuget/NuGet/NuGet.Config"
