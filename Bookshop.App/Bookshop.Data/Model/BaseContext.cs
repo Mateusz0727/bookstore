@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Entity.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Bookshop.Data.Model;
 
 public partial class BaseContext : DbContext
 {
-    public BaseContext()
-    {
-    }
+    private readonly string _connectionString;
+    public IConfiguration Configuration { get; }
 
     public BaseContext(DbContextOptions<BaseContext> options)
         : base(options)
     {
     }
-
+    public BaseContext(IConfiguration configuration)
+    {
+        Configuration = configuration;
+        _connectionString = Configuration.GetConnectionString("DefaultConnectionString");
+    }
     public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
 
     public virtual DbSet<Book> Books { get; set; }
@@ -33,6 +40,10 @@ public partial class BaseContext : DbContext
 
     public virtual DbSet<Log> Logs { get; set; }
 
+    public virtual DbSet<Order> Orders { get; set; }
+
+    public virtual DbSet<OrderPosition> OrderPositions { get; set; }
+
     public virtual DbSet<Schema> Schemas { get; set; }
 
     public virtual DbSet<Server> Servers { get; set; }
@@ -46,8 +57,13 @@ public partial class BaseContext : DbContext
     public virtual DbSet<VersionInfo> VersionInfos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=tcp:localhost,1433;Initial Catalog=bookshop;User=sa;Password=Qazwsx123@;Connect Timeout=5;TrustServerCertificate=True; Encrypt=False;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
+    }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -161,6 +177,43 @@ public partial class BaseContext : DbContext
             entity.ToTable("Log");
 
             entity.Property(e => e.Text).HasMaxLength(255);
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.ToTable("Order");
+
+            entity.Property(e => e.PublicId)
+                .HasMaxLength(36)
+                .IsUnicode(false)
+                .IsFixedLength();
+            entity.Property(e => e.Status).HasMaxLength(255);
+            entity.Property(e => e.UserId).HasColumnName("User_Id");
+
+            entity.HasOne(d => d.User).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_order_user");
+        });
+
+        modelBuilder.Entity<OrderPosition>(entity =>
+        {
+            entity.Property(e => e.BookId).HasColumnName("Book_Id");
+            entity.Property(e => e.OrderId).HasColumnName("Order_Id");
+            entity.Property(e => e.PublicId)
+                .HasMaxLength(36)
+                .IsUnicode(false)
+                .IsFixedLength();
+
+            entity.HasOne(d => d.Book).WithMany(p => p.OrderPositions)
+                .HasForeignKey(d => d.BookId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_orderPositions_book");
+
+            entity.HasOne(d => d.Order).WithMany(p => p.OrderPositions)
+                .HasForeignKey(d => d.OrderId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_orderPositions_order");
         });
 
         modelBuilder.Entity<Schema>(entity =>

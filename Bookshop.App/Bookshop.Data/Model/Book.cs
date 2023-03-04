@@ -18,4 +18,6 @@ public partial class Book
     public double Price { get; set; }
 
     public string PublishingHouse { get; set; } = null!;
+
+    public virtual ICollection<OrderPosition> OrderPositions { get; } = new List<OrderPosition>();
 }

@@ -20,6 +20,7 @@ using Bookshop.Configuration;
 using Bookshop.App.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
+using Bookshop.Configuration.Paypal;
 
 namespace Bookshop.App
 {
@@ -93,6 +94,9 @@ namespace Bookshop.App
 
             });
             services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
+            var bindPaypalSettings = new PaypalConfig();
+            Configuration.Bind("Paypal", bindPaypalSettings);
+            services.AddSingleton(bindPaypalSettings);
             var bindJwtSettings = new JWTConfig();
             Configuration.Bind("JsonWebTokenKeys", bindJwtSettings);
             services.AddSingleton(bindJwtSettings);

@@ -40,4 +40,9 @@
       "Name": "Edito Core"
     }
   }
+   "Paypal": {
+    "mode": "sandbox",
+    "ClientId": "AT49QTiu3R_CVdeIREc9OPcmKGqqYnVcAtIsg_dajDT5Uo9oSlMV7WH9ymEfKJguT9Zud3XdcwltVcII",
+    "ClientSecret": "EFZ0VVVcmJf_tf62zyVtE-pXVJ8N3yTQZ9-GqD85uXO6ASxxUhVyyMjm0CPJNGfvvK7I3So6UrYJ9mId"
+  }
 }

@@ -32,4 +32,6 @@ public partial class User
     public string? GivenName { get; set; }
 
     public string? Surname { get; set; }
+
+    public virtual ICollection<Order> Orders { get; } = new List<Order>();
 }

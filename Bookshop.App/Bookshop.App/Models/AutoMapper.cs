@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Bookshop.App.Models.Auth;
 using Bookshop.App.Models.Book;
+using Bookshop.App.Models.Order;
 using Bookshop.Data.Model;
 
 namespace Bookshop.App.Models
@@ -11,6 +12,7 @@ namespace Bookshop.App.Models
         {
             BookModels();
             UserModels();
+            OrderModels();
         }
         protected void BookModels()
         {
@@ -20,6 +22,11 @@ namespace Bookshop.App.Models
         protected void UserModels()
         {
             CreateMap<Data.Model.User, RegisterFormModel>().ReverseMap();
+        }
+        protected void OrderModels()
+        {
+            CreateMap<Data.Model.Order, OrderFormModel>().ReverseMap();
+            CreateMap<Data.Model.OrderPosition, OrderPositionFormModel>().ReverseMap();
         }
     }
 }
