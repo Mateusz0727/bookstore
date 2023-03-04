@@ -44,7 +44,7 @@ namespace Ideo.Core.App.Extensions.Middlewares
 
             context.Response.Headers.Add("Access-Control-Allow-Origin", allowOrigin);
             context.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
-      /*      context.Response.Headers.Add("Access-Control-Allow-Headers", "Authorization, Content-Type, Request-Token, X-Requested-With, Impersonate");*/
+            context.Response.Headers.Add("Access-Control-Allow-Headers", "Authorization, Content-Type, Request-Token, X-Requested-With, Impersonate");
             context.Response.Headers.Add("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS");
 
             if (!String.IsNullOrEmpty(configuration["Security:Strict-Transport-Security"]))

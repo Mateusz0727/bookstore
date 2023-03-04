@@ -48,9 +48,9 @@ namespace Bookshop.App
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bookshop v1"));
             }
             app.UseHangfireDashboard();
-          /*  app.UseHangfireServer();*/
-          /*  app.ApplicationServices.GetRequiredService<IJobScheduler>().Schedule();*/
-         
+            /*  app.UseHangfireServer();*/
+            /*  app.ApplicationServices.GetRequiredService<IJobScheduler>().Schedule();*/
+            app.UseMiddleware<ContentSecurityPolicyMiddleware>();
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors("_myAllowSpecificOrigins");

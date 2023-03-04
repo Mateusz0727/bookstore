@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
-import BookService, { BookForm } from '../../services/book.service';
 import { Search } from '../component/Search/Search';
 import { Link } from 'react-router-dom';
+import AuthService, { LoginModel } from '../../services/auth/auth.service';
 
 
 
 export default class Log extends Component {
-    private items: BookForm[] = [];
-    componentDidMount() {
+    private form :LoginModel = {
+        userName:'',
+        password:''
+      }
+      async onSubmit():Promise<void> {
+       
         try {
-            BookService.get().then((response) => {
-                this.setState({ itemki: response })
-                this.items = response;
-
-            }
-            );
-
+          await AuthService.login(this.form.userName,this.form.password);
+        console.log(this.form.password);
+          
+        } catch (err) {
+            debugger;
+          console.log(err);
         }
-        catch (ex) {
-            console.log(ex);
-
-        }
-    }
-
+      };
+      async setEmail(e:React.ChangeEvent<HTMLInputElement>){
+        this.form.userName =e.target.value
+     }
+     async setPassword(e:React.ChangeEvent<HTMLInputElement>){
+        this.form.password =e.target.value
+      }
     render() {
         return (
             <div>
@@ -39,19 +43,26 @@ export default class Log extends Component {
                 <main>
                     <div className="center">
                         <h1>Login</h1>
-                        <form method="post">
+                        <form>
                             <div className="txt_field">
-                                <input type="text" required />
+                                <input type="text" 
+                                required 
+                                 autoComplete='on'
+                                onChange={(e) => this.setEmail(e)}
+                                />
 
                                 <label>Username</label>
                             </div>
                             <div className="txt_field">
-                                <input type="password" required />
+                                <input type="password" 
+                                required 
+                                 autoComplete='on'
+                                 onChange={(e) => this.setPassword(e)}/>
                                 <span></span>
                                 <label>Password</label>
                             </div>
                             <div className="pass">Forgot Password?</div>
-                            <input type="submit" value="Login" />
+                            <input type="submit" value="Login" onClick={(e)=>this.onSubmit()}/>
                             <div className="signup_link">
                                 Not a member? <a href="#">Signup</a>
                             </div>
