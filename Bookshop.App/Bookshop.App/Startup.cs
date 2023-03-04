@@ -21,6 +21,7 @@ using Bookshop.App.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Bookshop.Configuration.Paypal;
+using Microsoft.Extensions.FileProviders;
 
 namespace Bookshop.App
 {
@@ -62,7 +63,22 @@ namespace Bookshop.App
                 endpoints.MapHangfireDashboard();
             });
             Bookshop.Migration.Migrator.Run(Configuration);
-       
+
+            app.UseStaticFiles();
+
+           
+            /*app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Configuration.GetConnectionString("Storage"), @"documents")),
+                RequestPath = new PathString("/Assets/documents")
+            });*/
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory()+ Configuration.GetConnectionString("Storage"), @"bookPhotos")),
+                RequestPath = new PathString("/Assets/images"),
+            });
 
         }
         public void ConfigureServices(IServiceCollection services)

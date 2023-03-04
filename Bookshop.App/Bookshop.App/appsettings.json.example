@@ -7,7 +7,9 @@
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnectionString": "Data Source=tcp:localhost,1433;Initial Catalog=bookshop;User=sa;Password=Qazwsx123@;Connect Timeout=5;TrustServerCertificate=True;"
+    "DefaultConnectionString": "Data Source=tcp:localhost,1433;Initial Catalog=bookshop;User=sa;Password=Qazwsx123@;Connect Timeout=5;TrustServerCertificate=True;",
+    "Storage": "\\..\\.storage",
+    "Assets": "https://localhost:4000/Assets"
   },
   "Security": {
     "Access-Control-Allow-Origin": [
@@ -40,9 +42,10 @@
       "Name": "Edito Core"
     }
   }
-   "Paypal": {
+  "Paypal": {
     "mode": "sandbox",
     "ClientId": "AT49QTiu3R_CVdeIREc9OPcmKGqqYnVcAtIsg_dajDT5Uo9oSlMV7WH9ymEfKJguT9Zud3XdcwltVcII",
     "ClientSecret": "EFZ0VVVcmJf_tf62zyVtE-pXVJ8N3yTQZ9-GqD85uXO6ASxxUhVyyMjm0CPJNGfvvK7I3So6UrYJ9mId"
   }
+
 }

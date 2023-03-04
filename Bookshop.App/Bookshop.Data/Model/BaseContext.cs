@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Common;
 using System.Data.Entity.Infrastructure;
 using Microsoft.EntityFrameworkCore;
@@ -13,15 +14,13 @@ public partial class BaseContext : DbContext
     private readonly string _connectionString;
     public IConfiguration Configuration { get; }
 
-    public BaseContext(DbContextOptions<BaseContext> options)
+    public BaseContext(DbContextOptions<BaseContext> options, IConfiguration configuration)
         : base(options)
-    {
-    }
-    public BaseContext(IConfiguration configuration)
     {
         Configuration = configuration;
         _connectionString = Configuration.GetConnectionString("DefaultConnectionString");
     }
+   
     public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
 
     public virtual DbSet<Book> Books { get; set; }
@@ -58,10 +57,9 @@ public partial class BaseContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
+        
             optionsBuilder.UseSqlServer(_connectionString);
-        }
+        
     }
 
 

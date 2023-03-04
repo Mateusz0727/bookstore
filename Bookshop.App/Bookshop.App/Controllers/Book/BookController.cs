@@ -1,6 +1,8 @@
 using AutoMapper;
 using Bookshop.App.Models.Book;
 using Bookshop.App.Services.Book;
+using Bookshop.App.Services.Resource;
+using Bookshop.Context;
 using Bookshop.Data.Model;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
@@ -18,13 +20,15 @@ namespace Bookshop.App.Controllers.Book
 
 
         private readonly BookService _bookService;
+        private readonly ResourceService _resourceService;
 
         public IMapper Mapper { get; }
 
-        public BookController(BookService bookService, IMapper Mapper)
+        public BookController(BookService bookService, IMapper Mapper, ResourceService resourceService)
         {
             _bookService = bookService;
             this.Mapper = Mapper;
+            _resourceService = resourceService;
         }
 
         [HttpGet]
@@ -33,6 +37,10 @@ namespace Bookshop.App.Controllers.Book
             var books = _bookService.GetAll();
 
             var result = Mapper.Map<List<BookFormModel>>(books);
+            foreach(var book in result)
+            {
+                book.ImageUrl = _resourceService.Get(book.Id);
+            }
             return result;
         }
         [HttpGet("{id}")]
@@ -40,7 +48,12 @@ namespace Bookshop.App.Controllers.Book
         {
             var book = _bookService.Get(id);
             if (book != null)
-                return GetResource(book);
+            {
+               var entity = GetResource(book);
+                entity.ImageUrl = _resourceService.Get(book.Id);
+                return entity;
+            }
+
             else return BadRequest();
         }
 
