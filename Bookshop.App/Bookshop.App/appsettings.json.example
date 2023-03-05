@@ -8,7 +8,7 @@
   "AllowedHosts": "*",
   "ConnectionStrings": {
     "DefaultConnectionString": "Data Source=tcp:localhost,1433;Initial Catalog=bookshop;User=sa;Password=Qazwsx123@;Connect Timeout=5;TrustServerCertificate=True;",
-    "Storage": "\\..\\.storage",
+    "Storage": "//..//.storage",
     "Assets": "https://localhost:4000/Assets"
   },
   "Security": {
