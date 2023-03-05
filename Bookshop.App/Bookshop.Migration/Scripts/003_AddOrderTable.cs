@@ -20,11 +20,7 @@ namespace Bookshop.Migration.Scripts
             .WithColumn("Status").AsString()
             .WithColumn("Amount").AsFloat();
 
-            Create.Table("OrderPositions")
-                .WithId()
-            .WithPublicId()
-            .WithColumn("Book_Id").AsLong().ForeignKey("FK_orderPositions_book", "Book", "Id")
-            .WithColumn("Price");
+
 
 
         }
@@ -34,11 +30,8 @@ namespace Bookshop.Migration.Scripts
             {
                 Delete.Table("Order");
             }
-            if (Schema.Table("OrderPositions").Exists())
-            {
-                Delete.Table("OrderPositions");
-            }
+
         }
     }
-   
+
 }
