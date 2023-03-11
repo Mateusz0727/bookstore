@@ -16,7 +16,7 @@ namespace Bookshop.App.Services.Book
         #region GetAll()
         public List<Data.Model.Book> GetAll()
         {
-            return Context.Books.OrderBy(x => x.Title).ToList();
+            return Context.Books.OrderBy(x => x.Id).ToList();
         }
         #endregion
         #region GetBook()
