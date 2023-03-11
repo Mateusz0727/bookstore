@@ -3,7 +3,7 @@ import axios from "../plugins/axios";
 export default class BookService {
     public static async get(): Promise<BookForm[]> {
         const result = (await axios.get("/book")).data;
-
+        console.log(result)
         return result;
     }
 }

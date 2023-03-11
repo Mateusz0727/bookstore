@@ -4,6 +4,7 @@ import { Search } from '../component/Search/Search';
 import Slider from '../component/Slider/Slider';
 import { Foter } from '../component/Foter/Foter';
 import { Link } from 'react-router-dom';
+import { Header } from '../component/Header/Header';
 
 
 
@@ -29,17 +30,10 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        <header>
-          <div id="logo"><img src="logo1.png" alt="jeszcze_nic" /></div>
-          <Search />
-          <nav>
-            <Link to="/" className="butnav">Główna</Link>
-            <Link to="/SubPage" className="butnav">Księgarnia</Link>
-            <Link to="/Log" className="butnav">Logowanie</Link>
-            <Link to="/Bag" className="butnav">Koszyk</Link>
-          </nav>
-        </header>
-        <hr />
+
+        <Header />
+
+
         <main>
           <div id="powitalny">
             <h2>Witaj w Bibliotece KMMK</h2><br />
