@@ -11,20 +11,28 @@ namespace Bookshop.App.Services.Order
 {
     public class OrderService:BaseService
     {
-        public OrderService(BaseContext context, IMapper mapper) : base(mapper, context)
-        {
+        private readonly OrderPositionService _orderPositionService;
 
+        public OrderService(BaseContext context, IMapper mapper,OrderPositionService orderPositionService) : base(mapper, context)
+        {
+            _orderPositionService = orderPositionService;
         }
-        public Data.Model.Order Create(OrderFormModel order,ClaimsPrincipal user)
+        public OrderFormModel Create(OrderFormModel order,ClaimsPrincipal user)
         {
           
             var entity = Mapper.Map<Data.Model.Order>(order);
             entity.UserId = user.Id();
             entity.PublicId = Guid.NewGuid().ToString();
             entity.Status = "CREATED";
+            foreach (var position in entity.OrderPositions)
+            {
+                position.PublicId = Guid.NewGuid().ToString();
+            }
             Context.Add<Data.Model.Order>(entity);
             Context.SaveChanges();
-            return entity;
+            _orderPositionService.AddPosition(order);
+            order = Mapper.Map<OrderFormModel>(order);
+            return order;
            
         }
 
@@ -43,14 +51,28 @@ namespace Bookshop.App.Services.Order
             return order;
         }
         #endregion
-        #region UpdateStaus()
-        public void UpdateStatus(long id,string status)
+        #region GetByPayPalId
+        public Data.Model.Order GetByPayPalId(string id)
         {
-            var order = Get(id);
+            var order = Context.Orders.Include(p => p.OrderPositions).Where(x => x.PayPalId == id).FirstOrDefault();
+            return order;
+        }
+        #endregion
+        #region UpdateStaus()
+        public void UpdateStatus(string id,string status)
+        {
+            var order = GetByPayPalId(id);
             order.Status =status;
             Context.Update(order);
             Context.SaveChanges();
         }
         #endregion
+        public void UpdatePayPalId(long id,string payPalId)
+        {
+            var order = Get(id);
+            order.PayPalId = payPalId;
+            Context.Update(order);
+            Context.SaveChanges();
+        }
     }
 }

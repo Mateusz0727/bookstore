@@ -64,7 +64,7 @@ namespace Bookshop.App.Controllers.Paypal
                     {
                         if (link.Rel.Equals("approve"))
                         {
-                          
+                            _orderService.UpdatePayPalId(id,result.Id); 
                             return Ok(link.Href);
                         }
                     }
@@ -83,16 +83,17 @@ namespace Bookshop.App.Controllers.Paypal
         #endregion
         #region CaptureOrder()
         [HttpPost("CaptureOrder")]
-        public async Task<ActionResult<Data.Model.Order>> CaptureOrder([FromBody] long orderId)
+        public async Task<ActionResult<Data.Model.Order>> CaptureOrder([FromBody] string orderId)
         {
             try
             {
                 var response = await _shipmentService.CaptureOrder(orderId.ToString());
                 var statusCode = response.StatusCode;
-
+                
                 if (statusCode.ToString().ToLower() == "created")
                 {
                     var result = response.Result<PayPalCheckoutSdk.Orders.Order>();
+                    
                     _orderService.UpdateStatus(orderId, result.Status);
                     return Ok(result);
                 }
@@ -112,7 +113,7 @@ namespace Bookshop.App.Controllers.Paypal
 
 
         [HttpPost("create-payment")]
-        public async Task<ActionResult> CreatePayment_()
+        public async Task<ActionResult> CreatePayment()
         {
             var environment = new SandboxEnvironment(PaypalConfiguration.ClientId, PaypalConfiguration.ClientSecret);
             var client = new PayPalHttpClient(environment);

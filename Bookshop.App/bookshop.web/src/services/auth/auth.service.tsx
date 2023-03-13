@@ -1,26 +1,27 @@
 import axios from "../../plugins/axios";
 
-export default class AuthService{
-    public static async login(email:string,password:string):Promise<any>
-    {
-            const result =  (  await axios.post("/auth/login",{
-                email,
-                password,
-            })).data;
-       
-            if(result){        
-                localStorage.setItem("user",JSON.stringify(result));
-            }
+class AuthService {
+
+    public login = async (email: string, password: string) => {
+        return await axios.post("/auth/login", {
+            email,
+            password,
+        });
     }
-    public static getCurrentUser() {
-       
+    getCurrentUser() {
+
         const user = localStorage.getItem("user")
-        if(user)
-            return  JSON.parse(user);
+        if (user)
+            return JSON.parse(user);
         else return null;
     };
+    logout() {
+        localStorage.removeItem("user");
+
+    };
 }
-export interface LoginModel{
-    userName:string;
-    password:string;
+export default new AuthService();
+export interface LoginModel {
+    userName: string;
+    password: string;
 }

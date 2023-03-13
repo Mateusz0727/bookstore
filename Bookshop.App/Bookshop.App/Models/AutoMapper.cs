@@ -25,8 +25,12 @@ namespace Bookshop.App.Models
         }
         protected void OrderModels()
         {
-            CreateMap<Data.Model.Order, OrderFormModel>().ReverseMap();
-            CreateMap<Data.Model.OrderPosition, OrderPositionFormModel>().ReverseMap();
+            CreateMap<Data.Model.Order, OrderFormModel>().ForMember(x=>x.Positions,m=>m.MapFrom(s=>s.OrderPositions))
+              
+                .ReverseMap();
+            CreateMap<Data.Model.OrderPosition, OrderPositionFormModel>()
+                .ForMember(x=>x.Book_Id,m=>m.MapFrom(s=>s.BookId))
+                .ReverseMap();
         }
     }
 }

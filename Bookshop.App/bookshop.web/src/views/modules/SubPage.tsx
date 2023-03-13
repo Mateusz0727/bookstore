@@ -3,6 +3,8 @@ import BookService, { BookForm } from '../../services/book.service';
 import { Search } from '../component/Search/Search';
 import Slider from '../component/Slider/Slider';
 import { Link } from 'react-router-dom';
+import { Header } from '../component/Header/Header';
+
 
 
 
@@ -27,16 +29,7 @@ export default class SubPage extends Component {
     render() {
         return (
             <div>
-                <header>
-                    <div id="logo"><img src="logo1.png" alt="jeszcze_nic" /></div>
-                    <Search />
-                    <nav>
-                        <Link to="/" className="butnav">Główna</Link>
-                        <Link to="/SubPage" className="butnav">Księgarnia</Link>
-                        <Link to="/Log" className="butnav">Logowanie</Link>
-                        <Link to="/Bag" className="butnav">Koszyk</Link>
-                    </nav>
-                </header>
+                <Header />
                 <main>
 
                     <section className="product">
@@ -55,7 +48,6 @@ export default class SubPage extends Component {
 
                         <Slider books={this.items} type="other" />
                     </section>
-
 
                 </main>
 
