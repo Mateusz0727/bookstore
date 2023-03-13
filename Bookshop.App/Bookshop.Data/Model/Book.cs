@@ -31,5 +31,9 @@ public partial class Book
 
     public long? ModifiedBy { get; set; }
 
+    public long LangugaeId { get; set; }
+
+    public virtual BookLanguage Langugae { get; set; } = null!;
+
     public virtual ICollection<OrderPosition> OrderPositions { get; } = new List<OrderPosition>();
 }

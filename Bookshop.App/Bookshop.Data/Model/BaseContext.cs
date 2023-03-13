@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Bookshop.Data.Model;
 
@@ -25,6 +24,8 @@ public partial class BaseContext : DbContext
     public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
 
     public virtual DbSet<Book> Books { get; set; }
+
+    public virtual DbSet<BookLanguage> BookLanguages { get; set; }
 
     public virtual DbSet<Counter> Counters { get; set; }
 
@@ -87,6 +88,7 @@ public partial class BaseContext : DbContext
                 .HasColumnName("autor");
             entity.Property(e => e.CreatedBy).HasDefaultValueSql("((1))");
             entity.Property(e => e.DateCreatedUtc).HasDefaultValueSql("('2023-03-13T16:33:46')");
+            entity.Property(e => e.LangugaeId).HasDefaultValueSql("((1))");
             entity.Property(e => e.PublicId)
                 .HasMaxLength(36)
                 .IsUnicode(false)
@@ -95,6 +97,23 @@ public partial class BaseContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("Publishing_house");
             entity.Property(e => e.Title).HasMaxLength(255);
+
+            entity.HasOne(d => d.Langugae).WithMany(p => p.Books)
+                .HasForeignKey(d => d.LangugaeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_book_bookLanguage");
+        });
+
+        modelBuilder.Entity<BookLanguage>(entity =>
+        {
+            entity.ToTable("BookLanguage");
+
+            entity.Property(e => e.LanguageCode).HasMaxLength(255);
+            entity.Property(e => e.LanguageName).HasMaxLength(255);
+            entity.Property(e => e.PublicId)
+                .HasMaxLength(36)
+                .IsUnicode(false)
+                .IsFixedLength();
         });
 
         modelBuilder.Entity<Counter>(entity =>

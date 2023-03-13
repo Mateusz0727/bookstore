@@ -42,13 +42,18 @@ namespace Bookshop.App.Services.Book
             
         }
         #endregion
-        #region GetNew
+        #region GetNew()
         public List<Data.Model.Book> GetNew()
         {
             return Context.Books.OrderByDescending(x => x.DateCreatedUtc).Take(10).ToList();
         }
         #endregion
-
+        #region GetBookByLanguage()
+        public List<Data.Model.Book> GetBookByLanguage(string languageCode)
+        {
+            return Context.Books.Where(x=>x.Langugae.LanguageCode.Contains(languageCode)).Take(10).ToList();
+        }
+        #endregion
         /* #region Create()
          public Data.Model.Book Create(BookFormModel formModel)
          {

@@ -67,6 +67,18 @@ namespace Bookshop.App.Controllers.Book
             }
             return result;
         }
+        [HttpGet("language")]
+        public async Task<ActionResult<List<BookFormModel>>> GetBookByLanguage()
+        {
+            var books = _bookService.GetBookByLanguage("pl");
+
+            var result = Mapper.Map<List<BookFormModel>>(books);
+            foreach (var book in result)
+            {
+                book.ImageUrl = _resourceService.Get(book.Id);
+            }
+            return result;
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<BookFormModel>> Get(long id)
         {
