@@ -74,6 +74,8 @@ public partial class BaseContext : DbContext
             entity.Property(e => e.Autor)
                 .HasMaxLength(255)
                 .HasColumnName("autor");
+            entity.Property(e => e.CreatedBy).HasDefaultValueSql("((1))");
+            entity.Property(e => e.DateCreatedUtc).HasDefaultValueSql("('2023-03-13T16:33:46')");
             entity.Property(e => e.PublicId)
                 .HasMaxLength(36)
                 .IsUnicode(false)

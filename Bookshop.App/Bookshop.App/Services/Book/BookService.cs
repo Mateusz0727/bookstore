@@ -42,7 +42,13 @@ namespace Bookshop.App.Services.Book
             
         }
         #endregion
-   
+        #region GetNew
+        public List<Data.Model.Book> GetNew()
+        {
+            return Context.Books.OrderByDescending(x => x.DateCreatedUtc).Take(10).ToList();
+        }
+        #endregion
+
         /* #region Create()
          public Data.Model.Book Create(BookFormModel formModel)
          {

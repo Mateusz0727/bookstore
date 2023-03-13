@@ -23,5 +23,13 @@ public partial class Book
 
     public int? Discount { get; set; }
 
+    public DateTime DateCreatedUtc { get; set; }
+
+    public long CreatedBy { get; set; }
+
+    public DateTime? DateModifiedUtc { get; set; }
+
+    public long? ModifiedBy { get; set; }
+
     public virtual ICollection<OrderPosition> OrderPositions { get; } = new List<OrderPosition>();
 }
