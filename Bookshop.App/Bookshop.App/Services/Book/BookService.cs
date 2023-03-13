@@ -54,6 +54,13 @@ namespace Bookshop.App.Services.Book
             return Context.Books.Where(x=>x.Langugae.LanguageCode.Contains(languageCode)).Take(10).ToList();
         }
         #endregion
+        #region GetUserBooks
+        public List<Data.Model.Book> GetUserBooks(long id)
+        {
+       return Context.OrderPositions.Where(p => p.Order.UserId == id).Select(x => x.Book).ToList();
+         
+        }
+        #endregion
         /* #region Create()
          public Data.Model.Book Create(BookFormModel formModel)
          {

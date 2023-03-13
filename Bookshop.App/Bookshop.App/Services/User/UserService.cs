@@ -73,9 +73,6 @@ namespace Bookshop.App.Services.User
             return false;
         }
 
-        internal object Fetch()
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

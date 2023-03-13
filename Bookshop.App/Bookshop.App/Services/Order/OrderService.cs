@@ -29,17 +29,22 @@ namespace Bookshop.App.Services.Order
             entity.Status = "CREATED";
             foreach (var position in entity.OrderPositions)
             {
-                var book = _bookService.Get(position.BookId);
-                if(book.IsDiscount&&book.Discount!=null)
+                if (_bookService.GetUserBooks(user.Id()).Contains(position.Book).Equals(null))
                 {
-                    entity.Amount += (float)(book.Price * (float)(1 - (float)((float)book.Discount / 100)));
+                    var book = _bookService.Get(position.BookId);
+                    if (book.IsDiscount && book.Discount != null)
+                    {
+                        entity.Amount += (float)(book.Price * (float)(1 - (float)((float)book.Discount / 100)));
+                    }
+                    else
+                    {
+                        entity.Amount += (float)book.Price;
+                    }
+
+                    position.PublicId = Guid.NewGuid().ToString();
                 }
-                else
-                {
-                    entity.Amount += (float)book.Price;
-                }
+                else throw new Exception("Użytkownik posiada którąs z ksiażek");
               
-                position.PublicId = Guid.NewGuid().ToString();
             }
             Context.Add<Data.Model.Order>(entity);
             Context.SaveChanges();

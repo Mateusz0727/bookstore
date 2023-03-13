@@ -4,6 +4,7 @@ using Bookshop.App.Services.Book;
 using Bookshop.App.Services.Resource;
 using Bookshop.Context;
 using Bookshop.Data.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -71,6 +72,19 @@ namespace Bookshop.App.Controllers.Book
         public async Task<ActionResult<List<BookFormModel>>> GetBookByLanguage()
         {
             var books = _bookService.GetBookByLanguage("pl");
+
+            var result = Mapper.Map<List<BookFormModel>>(books);
+            foreach (var book in result)
+            {
+                book.ImageUrl = _resourceService.Get(book.Id);
+            }
+            return result;
+        }
+        [Authorize(Policy = "JwtPolicy")]
+        [HttpGet("userBooks")]
+        public async Task<ActionResult<List<BookFormModel>>> GetUserBooks()
+        {
+            var books = _bookService.GetUserBooks(User.Id());
 
             var result = Mapper.Map<List<BookFormModel>>(books);
             foreach (var book in result)
