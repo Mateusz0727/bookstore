@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Bookshop.Data.Model;
 
@@ -9,10 +10,16 @@ public partial class BaseContext : DbContext
     public BaseContext()
     {
     }
-
-    public BaseContext(DbContextOptions<BaseContext> options)
+    private readonly string _connectionString;
+    public IConfiguration Configuration { get; }
+    public BaseContext(DbContextOptions<BaseContext> options, IConfiguration configuration)
         : base(options)
     {
+    }
+    public BaseContext(IConfiguration configuration)
+    {
+        Configuration = configuration;
+        _connectionString = Configuration.GetConnectionString("DefaultConnectionString");
     }
 
     public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
@@ -50,8 +57,12 @@ public partial class BaseContext : DbContext
     public virtual DbSet<VersionInfo> VersionInfos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-6J70549\\SQLEXPRESS;Database=Bookshop;User Id=admin;Password=admin;MultipleActiveResultSets=False; Encrypt=False;");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(_connectionString);
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
