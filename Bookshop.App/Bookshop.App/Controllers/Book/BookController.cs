@@ -43,6 +43,18 @@ namespace Bookshop.App.Controllers.Book
             }
             return result;
         }
+        [HttpGet("popular")]
+        public async Task<ActionResult<List<BookFormModel>>> GetPopular()
+        {
+            var books = _bookService.GetPopular();
+
+            var result = Mapper.Map<List<BookFormModel>>(books);
+            foreach (var book in result)
+            {
+                book.ImageUrl = _resourceService.Get(book.Id);
+            }
+            return result;
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult<BookFormModel>> Get(long id)
         {

@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Common;
-using System.Data.Entity.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace Bookshop.Data.Model;
 
 public partial class BaseContext : DbContext
 {
-    private readonly string _connectionString;
-    public IConfiguration Configuration { get; }
+    public BaseContext()
+    {
+    }
 
-    public BaseContext(DbContextOptions<BaseContext> options, IConfiguration configuration)
+    public BaseContext(DbContextOptions<BaseContext> options)
         : base(options)
     {
-        Configuration = configuration;
-        _connectionString = Configuration.GetConnectionString("DefaultConnectionString");
     }
-   
+
     public virtual DbSet<AggregatedCounter> AggregatedCounters { get; set; }
 
     public virtual DbSet<Book> Books { get; set; }
@@ -56,12 +50,8 @@ public partial class BaseContext : DbContext
     public virtual DbSet<VersionInfo> VersionInfos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        
-            optionsBuilder.UseSqlServer(_connectionString);
-        
-    }
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-6J70549\\SQLEXPRESS;Database=Bookshop;User Id=admin;Password=admin;MultipleActiveResultSets=False; Encrypt=False;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -181,6 +171,7 @@ public partial class BaseContext : DbContext
         {
             entity.ToTable("Order");
 
+            entity.Property(e => e.PayPalId).HasMaxLength(255);
             entity.Property(e => e.PublicId)
                 .HasMaxLength(36)
                 .IsUnicode(false)
@@ -210,8 +201,7 @@ public partial class BaseContext : DbContext
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderPositions)
                 .HasForeignKey(d => d.OrderId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_orderPositions_order");
+                .HasConstraintName("FK_OrderPositions_Order1");
         });
 
         modelBuilder.Entity<Schema>(entity =>

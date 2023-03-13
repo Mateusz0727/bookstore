@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Bookshop.Mailing;
 using AutoMapper;
 using Bookshop.App.Models.Book;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bookshop.App.Services.Book
 {
@@ -28,11 +29,17 @@ namespace Bookshop.App.Services.Book
         }
         #endregion
         #region GetPopular()
-        public Data.Model.Book GetPopular(long id)
+        public List<Data.Model.Book> GetPopular()
         {
-            var book = Context.Books.FirstOrDefault(x => x.Id == id);
-
-            return book == null ? null : book;
+         var popularIds=   Context.OrderPositions.GroupBy(x => x.BookId).OrderByDescending(q => q.Count()).Take(10).Select(x => x.Key).ToList();
+            if(popularIds.Count<10)
+            {
+                popularIds.AddRange(Context.Books.Select(x=>x.Id).Where(x=>!popularIds.Contains(x)).Take(10-popularIds.Count()).ToList());
+            }
+           var b= Context.Books.Where(x => popularIds.Contains(x.Id));
+            return b.ToList();
+          /*  return Context.Books.OrderBy(x => x.Id).ToList();*/
+            
         }
         #endregion
         /* #region Create()

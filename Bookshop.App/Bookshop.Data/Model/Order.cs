@@ -23,6 +23,8 @@ public partial class Order
 
     public float Amount { get; set; }
 
+    public string? PayPalId { get; set; }
+
     public virtual ICollection<OrderPosition> OrderPositions { get; } = new List<OrderPosition>();
 
     public virtual User User { get; set; } = null!;
