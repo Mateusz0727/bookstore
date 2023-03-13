@@ -4,7 +4,7 @@
     {
         public long Id { get; set; }
 
-        public string Title { get; set; } = null!; 
+        public string Title { get; set; } = null!;
 
         public string Autor { get; set; } = null!;
 
@@ -13,7 +13,12 @@
         public double Price { get; set; }
 
         public string PublishingHouse { get; set; } = null!;
+
         public string ImageUrl { get; set; } = null!;
+
+        public bool IsDiscount { get; set; }
+
+        public int Discount { get; set; }
 
     }
 }

@@ -47,7 +47,10 @@ export default class Slider extends Component<BookProp>
           {this.props.books.map((item) =>
             <div className="product-card" key={item.id}>
               <div className="product-image" >
-                {/* <span className="discount-tag">50% off</span> */}
+                {
+                  item.isDiscount&&item.discount!=0?( <span className="discount-tag">{item.discount}% off</span>):(<div></div>)
+                }
+               
                 <img src={item.imageUrl} className="product-thumb" alt="" />
                 <button className="card-btn" >add to wishlist</button>
               </div>

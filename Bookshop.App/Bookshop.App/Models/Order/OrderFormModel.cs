@@ -9,8 +9,7 @@ namespace Bookshop.App.Models.Order
         [Required]
         public List<OrderPositionFormModel> Positions { get; set; } = null!;
 
-        public float Amount { get; set; }
-
+       
      
     }
 }

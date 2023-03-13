@@ -15,4 +15,6 @@ export interface BookForm {
     price: number,
     publishingHouse: string
     imageUrl: string
+    isDiscount:boolean
+    discount:number
 }

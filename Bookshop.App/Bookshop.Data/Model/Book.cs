@@ -19,5 +19,9 @@ public partial class Book
 
     public string PublishingHouse { get; set; } = null!;
 
+    public bool IsDiscount { get; set; }
+
+    public int? Discount { get; set; }
+
     public virtual ICollection<OrderPosition> OrderPositions { get; } = new List<OrderPosition>();
 }

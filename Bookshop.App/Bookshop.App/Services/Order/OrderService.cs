@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Bookshop.App.Models.Order;
+using Bookshop.App.Services.Book;
 using Bookshop.Context;
 using Bookshop.Data.Extensions;
 using Bookshop.Data.Model;
@@ -12,10 +13,12 @@ namespace Bookshop.App.Services.Order
     public class OrderService:BaseService
     {
         private readonly OrderPositionService _orderPositionService;
+        private readonly BookService _bookService;
 
-        public OrderService(BaseContext context, IMapper mapper,OrderPositionService orderPositionService) : base(mapper, context)
+        public OrderService(BaseContext context, IMapper mapper,OrderPositionService orderPositionService,BookService bookService) : base(mapper, context)
         {
             _orderPositionService = orderPositionService;
+            _bookService = bookService;
         }
         public OrderFormModel Create(OrderFormModel order,ClaimsPrincipal user)
         {
@@ -26,6 +29,16 @@ namespace Bookshop.App.Services.Order
             entity.Status = "CREATED";
             foreach (var position in entity.OrderPositions)
             {
+                var book = _bookService.Get(position.BookId);
+                if(book.IsDiscount&&book.Discount!=null)
+                {
+                    entity.Amount += (float)(book.Price * (float)(1 - (float)((float)book.Discount / 100)));
+                }
+                else
+                {
+                    entity.Amount += (float)book.Price;
+                }
+              
                 position.PublicId = Guid.NewGuid().ToString();
             }
             Context.Add<Data.Model.Order>(entity);
