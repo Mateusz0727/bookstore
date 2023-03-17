@@ -18,7 +18,7 @@ export const Header = () => {
                 <Link to="/" className="butnav">Główna</Link>
                 <Link to="/SubPage" className="butnav">Księgarnia</Link>
                 {user ? (
-                    <Link to="/UserPage" className="butnav">User</Link>
+                    <Link to="/UserPage" className="butnav">Profil</Link>
                 ) : (
                     <Link to="/Log" className="butnav">Logowanie</Link>
 

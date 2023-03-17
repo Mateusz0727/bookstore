@@ -12,7 +12,7 @@ export default class SubPage extends Component {
     private items: BookForm[] = [];
     componentDidMount() {
         try {
-            BookService.get().then((response) => {
+            BookService.getAll().then((response) => {
                 this.setState({ itemki: response })
                 this.items = response;
 

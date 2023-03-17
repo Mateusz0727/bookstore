@@ -1,9 +1,11 @@
 import { Component, ReactNode, useState } from "react";
 import { BookForm } from "../../../services/book.service";
-import '../../../index.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { type } from "os";
+import { Link, Navigate } from 'react-router-dom';
+
 interface BookProp {
   books: BookForm[];
   type: string;
@@ -52,7 +54,7 @@ export default class Slider extends Component<BookProp>
                 }
                
                 <img src={item.imageUrl} className="product-thumb" alt="" />
-                <button className="card-btn" >add to wishlist</button>
+                <Link to={`/ProductPage/${item.id}`}> <button className="card-btn" >Sprawdź</button></Link>
               </div>
               <div className="product-info">
                 <h3 className="product-brand">{item.title}</h3>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import BookService, { BookForm } from '../../services/book.service';
-import { Search } from '../component/Search/Search';
 import Slider from '../component/Slider/Slider';
 import { Foter } from '../component/Foter/Foter';
 import { Link } from 'react-router-dom';
@@ -9,11 +8,12 @@ import { Header } from '../component/Header/Header';
 
 
 
+
 export default class Dashboard extends Component {
   private items: BookForm[] = [];
   componentDidMount() {
     try {
-      BookService.get().then((response) => {
+      BookService.getAll().then((response) => {
         this.setState({ itemki: response })
         this.items = response;
 
@@ -29,7 +29,7 @@ export default class Dashboard extends Component {
 
   render() {
     return (
-      <div>
+      <section>
 
         <Header />
 
@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
         <Foter />
 
 
-      </div >
+      </section >
     )
   }
 }

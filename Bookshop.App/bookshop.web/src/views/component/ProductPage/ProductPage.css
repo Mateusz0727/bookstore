@@ -1,0 +1,50 @@
+* {
+    margin: 0px;
+    background-color: black;
+
+
+}
+
+
+
+.main2 {
+    height: 100%;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 150px;
+}
+
+
+
+.product-image2 {
+    position: relative;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+.product-info2 {
+    padding: 15px 130px 20px 130px;
+    float: left;
+}
+
+.product-info2>p {
+    padding-top: 50px;
+}
+
+/* .but_Product {
+    padding-top: 350px;
+} */
+
+.des_Product {
+    height: 400px;
+}
+
+button:hover {
+    background-color: white;
+    color: black;
+}

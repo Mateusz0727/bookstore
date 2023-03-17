@@ -17,7 +17,7 @@ export default class UserPage extends Component {
     private items: BookForm[] = [];
     componentDidMount() {
         try {
-            BookService.get().then((response) => {
+            BookService.getAll().then((response) => {
                 this.setState({ itemki: response })
                 this.items = response;
 
