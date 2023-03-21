@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import BookService, { BookForm } from '../../../services/book.service';
+import BookService, { BookForm } from '../../../services/book/book.service';
 import './ProductPage.css'
 import { Header } from '../Header/Header';
 import { Foter } from '../Foter/Foter';
@@ -21,7 +21,9 @@ export default function ProductPage() {
         describe: '',
         price: 0,
         publishingHouse: '',
-        imageUrl: ''
+        imageUrl: '',
+        isDiscount: false,
+        discount:0
     });
     const { id } = useParams<RouteParams>();
 

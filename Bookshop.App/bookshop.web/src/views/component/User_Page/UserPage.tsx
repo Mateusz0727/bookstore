@@ -1,8 +1,7 @@
-import { Component, useState } from "react";
+import { Component } from "react";
 import '../../../index3.css';
-import BookService, { BookForm } from "../../../services/book.service";
+import BookService, { BookForm } from "../../../services/book/book.service";
 import { Link } from 'react-router-dom';
-import AuthService, { LoginModel } from '../../../services/auth/auth.service';
 import authService from "../../../services/auth/auth.service";
 
 
@@ -17,10 +16,9 @@ export default class UserPage extends Component {
     private items: BookForm[] = [];
     componentDidMount() {
         try {
-            BookService.getAll().then((response) => {
+            BookService.getUserBook().then((response) => {
                 this.setState({ itemki: response })
                 this.items = response;
-
             }
             );
 
@@ -60,8 +58,8 @@ export default class UserPage extends Component {
                         <h1>Twoje zakupione Ksiązki </h1>
 
                         <div>
-                            {this.items.map((item) =>
-                                <div className="product-card" key={item.id}>
+                            {this.items.map((item,index) =>
+                                <div className="product-card" key={index}>
                                     <div className="product-image">
                                         <img src={item.imageUrl} className="product-thumb" alt="" />
                                     </div>

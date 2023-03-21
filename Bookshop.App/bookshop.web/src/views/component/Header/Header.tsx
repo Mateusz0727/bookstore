@@ -1,8 +1,7 @@
-import { Component, useState } from "react";
 import '../../../index.css';
 import { Link } from "react-router-dom";
 import { Search } from '../../component/Search/Search';
-import AuthService, { LoginModel } from '../../../services/auth/auth.service';
+import AuthService from '../../../services/auth/auth.service';
 
 
 

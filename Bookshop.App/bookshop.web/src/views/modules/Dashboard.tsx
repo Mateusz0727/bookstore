@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import BookService, { BookForm } from '../../services/book.service';
+import BookService, { BookForm } from '../../services/book/book.service';
 import Slider from '../component/Slider/Slider';
 import { Foter } from '../component/Foter/Foter';
-import { Link } from 'react-router-dom';
 import { Header } from '../component/Header/Header';
 
 
@@ -13,7 +12,7 @@ export default class Dashboard extends Component {
   private items: BookForm[] = [];
   componentDidMount() {
     try {
-      BookService.getAll().then((response) => {
+      BookService.getPopular().then((response) => {
         this.setState({ itemki: response })
         this.items = response;
 

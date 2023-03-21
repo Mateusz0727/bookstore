@@ -1,10 +1,10 @@
-import { Component, ReactNode, useState } from "react";
-import { BookForm } from "../../../services/book.service";
+import { Component, ReactNode } from "react";
+import { BookForm } from "../../../services/book/book.service";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { type } from "os";
-import { Link, Navigate } from 'react-router-dom';
+
+import { Link } from 'react-router-dom';
 
 interface BookProp {
   books: BookForm[];
@@ -50,7 +50,7 @@ export default class Slider extends Component<BookProp>
             <div className="product-card" key={item.id}>
               <div className="product-image" >
                 {
-                  item.isDiscount&&item.discount!=0?( <span className="discount-tag">{item.discount}% off</span>):(<div></div>)
+                  item.isDiscount&&item.discount!==0?( <span className="discount-tag">{item.discount}% off</span>):(<div></div>)
                 }
                
                 <img src={item.imageUrl} className="product-thumb" alt="" />
